@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#000420</color>
-    <color name="colorAccent">#ff825f</color>
+    <color name="colorPrimaryDark">#00094b</color>
+    <color name="colorCellSelDark">#000044</color>
+    <color name="colorAccent">#fe8352</color>
     <color name="colorLight">#8bc0ff</color>
     <color name="buttonColorAccent">#ffa38a</color>
+    <color name="dividerColor">#6a81ff</color>
 </resources>

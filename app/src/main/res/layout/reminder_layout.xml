@@ -19,6 +19,7 @@
         android:clickable="false"
         android:buttonTint="@color/colorAccent"
         android:textColor="@android:color/white"
+        android:elevation="14px"
          />
 
 </LinearLayout>

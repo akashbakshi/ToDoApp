@@ -26,11 +26,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ListView reminderListView;
+    TextView listviewItem;
     Button completeTask,addReminder;
     EditText reminderField;
     ArrayList<String> reminderEvents = new ArrayList<String>();
     ArrayAdapter<String> reminderAdapter;
     int selectedNum = 0;
+    int cellSelected = -1;
     boolean reminderSelected = false;
 
     Color selectedBackgroundCol;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        listviewItem = (TextView)findViewById(R.id.reminder_item);
         reminderField = (EditText)findViewById(R.id.reminderField);
         reminderField.setVisibility(View.INVISIBLE);
         reminderField.setEnabled(false);
@@ -55,12 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(cellSelected > -1)
+                    clearCellSelection();
 
+                view.setBackgroundColor(getResources().getColor(R.color.colorCellSelDark));
                 view.setSelected(true);
                 completeTask.setVisibility(View.VISIBLE);
                 openCompleteBtnAnimation(false,true);
                 reminderSelected = true;
                 addReminder.setText("x");
+                cellSelected = position;
+
             }
         });
 
@@ -161,7 +170,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    public void clearCellSelection(){
 
+        reminderListView.setBackgroundColor(Color.TRANSPARENT);
+        reminderListView.getChildAt(cellSelected).setBackgroundColor(Color.TRANSPARENT);
+    }
     public void onAddClick(View view){
         selectedNum++;
         if(selectedNum == 1 && reminderSelected == false) {
