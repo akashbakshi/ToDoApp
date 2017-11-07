@@ -13,9 +13,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     TextView listviewItem;
     Button completeTask,addReminder;
     EditText reminderField;
+    Switch actionSwitch;
+
     ArrayList<String> reminderEvents = new ArrayList<String>();
     ArrayAdapter<String> reminderAdapter;
     int selectedNum = 0;
@@ -42,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        actionSwitch = (Switch)findViewById(R.id.delete_completeSwitch);
         listviewItem = (TextView)findViewById(R.id.reminder_item);
         reminderField = (EditText)findViewById(R.id.reminderField);
-        reminderField.setVisibility(View.INVISIBLE);
-        reminderField.setEnabled(false);
 
         completeTask = (Button)findViewById(R.id.btnComplete);
         addReminder = (Button)findViewById(R.id.btnAddReminder);
@@ -65,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 view.setBackgroundColor(getResources().getColor(R.color.colorCellSelDark));
                 view.setSelected(true);
                 completeTask.setVisibility(View.VISIBLE);
-                openCompleteBtnAnimation(false,true);
                 reminderSelected = true;
                 addReminder.setText("x");
                 cellSelected = position;
@@ -73,89 +75,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        actionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+            }
+        });
     }
 
-    public void openCompleteBtnAnimation(boolean height, boolean width){
 
 
-        completeTask.setVisibility(View.VISIBLE);
-        if(height) {
-            float transAmnt = -(addReminder.getHeight() + 20.0f);
-            completeTask.animate().translationY(transAmnt).setDuration(200).setListener(null).start();
-        }
-        else if (width){
-
-            float transAmnt = -(addReminder.getWidth()+20.0f);
-            completeTask.animate().translationX(transAmnt).setDuration(200).setListener(null).start();
-        }
-    }
-
-    public void closeCompleteBtnAnimation(boolean height, boolean width){
-        //Hide edit text
-        reminderField.setEnabled(false);
-        //change back to normal plus
-
-        if(height) {
-            completeTask.animate().translationY(0.0f).setDuration(350).setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    if (reminderField.getVisibility() == View.VISIBLE) {
-                        completeTask.setVisibility(View.INVISIBLE);
-                        addReminder.setText("+");
-                        reminderField.setVisibility(View.INVISIBLE);
-                    }
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-        }
-        else if (width){
-
-            completeTask.animate().translationX(0.0f).setDuration(350).setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    if (reminderSelected) {
-                        completeTask.setVisibility(View.INVISIBLE);
-                        addReminder.setText("+");
-                        reminderField.setVisibility(View.INVISIBLE);
-                        reminderListView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                        reminderListView.setBackgroundColor(Color.TRANSPARENT);
-                        final TextView tv = (TextView)findViewById(R.id.reminder_item);
-                        tv.setBackgroundColor(Color.alpha(0));
-                        reminderSelected = false;
-                    }
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-        }
-    }
     public void onCompleteAdd(View view){
         //Toast.makeText(getApplicationContext(),reminderField.getText().toString(),Toast.LENGTH_SHORT).show();
         if(selectedNum == 1){
@@ -166,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 reminderEvents.add(reminderField.getText().toString());
                 Collections.reverse(reminderEvents);
                 reminderAdapter.notifyDataSetChanged();
-                closeCompleteBtnAnimation(true,false);
             }
         }
     }
@@ -177,26 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onAddClick(View view){
         selectedNum++;
-        if(selectedNum == 1 && reminderSelected == false) {
-            openCompleteBtnAnimation(true,false);
-            //Enable edit text
-            reminderField.setEnabled(true);
-            reminderField.setText("");
-            reminderField.setVisibility(View.VISIBLE);
 
-            //change to X
-            addReminder.setText("x");
-        }
-        else if (selectedNum > 1 && reminderSelected == false){
-            closeCompleteBtnAnimation(true,false);
-
-            selectedNum = 0;
-        }
-
-        if(reminderSelected == true && selectedNum == 1){
-            closeCompleteBtnAnimation(false,true);
-            selectedNum = 0;
-        }
     }
 }
 

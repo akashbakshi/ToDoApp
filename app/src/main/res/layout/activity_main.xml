@@ -8,28 +8,13 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.example.akash.todoapp.MainActivity">
 
-    <EditText
-        android:id="@+id/reminderField"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:hint="Enter Reminder Here"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@color/colorLight"
-        android:imeOptions="actionDone"
-        app:layout_constraintBottom_toTopOf="@+id/reminderList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Things To Do"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
@@ -39,40 +24,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.017" />
 
     <ListView
         android:id="@+id/reminderList"
         android:layout_width="match_parent"
-        android:layout_height="464dp"
+        android:layout_height="422dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:divider="@color/dividerColor"
         android:dividerHeight="4px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/delete_completeSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
     </ListView>
-
-    <Button
-        android:id="@+id/btnAddReminder"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/circularbutton"
-        android:text="+"
-        android:textAlignment="center"
-        android:onClick="onAddClick"
-        android:textColor="@android:color/white"
-        android:textSize="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnComplete"
@@ -92,6 +60,67 @@
         app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnAddReminder"
+        android:layout_width="65dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:text="+"
+        android:textAlignment="center"
+        android:textColor="@color/colorLight"
+        android:textSize="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/reminderList"
+        app:layout_constraintEnd_toStartOf="@+id/reminderField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/reminderField"
+        android:layout_width="288dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Type Your Reminder Here"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorLight"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/reminderList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Switch
+        android:id="@+id/delete_completeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Complete"
+        android:textOff = "Complete"
+        android:textOn = "Delete"
+        android:textColor="@color/colorLight"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="372dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/buttonColorAccent"
+        android:text="Refresh"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
